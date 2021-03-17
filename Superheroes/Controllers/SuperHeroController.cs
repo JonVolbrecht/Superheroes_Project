@@ -30,6 +30,9 @@ namespace Superheroes.Controllers
         // GET: SuperHeroController/Details/5
         public ActionResult Details(int id)
         {
+            //if null
+            Superhero superhero = _context.Superheroes.Find(id);
+            //if statement for null
             return View();
         }
 
@@ -49,7 +52,7 @@ namespace Superheroes.Controllers
             {
                 _context.Superheroes.Add(superhero);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -70,7 +73,7 @@ namespace Superheroes.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -91,7 +94,10 @@ namespace Superheroes.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Superhero superhero = _context.Superheroes.Find(id);
+                _context.Superheroes.Remove(superhero);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
             }
             catch
             {
